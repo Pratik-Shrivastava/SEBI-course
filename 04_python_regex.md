@@ -17,7 +17,7 @@ Instead of searching text manually, regex lets you describe what you want — e.
 | Function | Description |
 |-----------|-------------|
 | re.search(pattern, string) | Finds the first match |
-| re.findAll(pattern, string) | Returns all matches as list |
+| re.findall(pattern, string) | Returns all matches as list |
 | re.match(pattern, string) | Matches only from start |
 | re.sub(pattern, repl, string) | Replaces occurrences |
 | re.split(pattern, string) | Splits string by pattern |
