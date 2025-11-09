@@ -11,20 +11,20 @@
 Regular Expressions are powerful text patterns used to find, extract, or replace specific strings using the `re` module in Python.
 
 **Concept:**
-Think of regex as **smart search**. Instead of searching text manually, regex lets you describe what you want — e.g., digits, words, email IDs.
+Think of regex as `smart search`. Instead of searching text manually, regex lets you describe what you want — e.g., digits, words, email IDs.
 
 #### Common Functions
 | Function | Description |
 |-----------|-------------|
-| re.search(pattern, string) | Finds the first match |
 | re.findall(pattern, string) | Returns all matches as list |
-| re.finditer(pattern, string) | Returns an iterator yielding match objects for all matches |
+| re.search(pattern, string) | Finds the first match |
 | re.match(pattern, string) | Matches only from start |
-| re.fullmatch(pattern, string) | Matches the entire string against the pattern |
-| re.sub(pattern, repl, string) | Replaces occurrences |
-| re.subn(pattern, repl, string) | ame as sub() but returns a tuple (new_string, number_of_subs_made) |
-| re.split(pattern, string) | Splits string by pattern |
 | re.compile(pattern) | Compiles regex for reuse |
+| re.sub(pattern, repl, string) | Replaces occurrences |
+| re.split(pattern, string) | Splits string by pattern |
+| re.subn(pattern, repl, string) | ame as sub() but returns a tuple (new_string, number_of_subs_made) |
+| re.finditer(pattern, string) | Returns an iterator yielding match objects for all matches |
+| re.fullmatch(pattern, string) | Matches the entire string against the pattern |
 | re.escape(string) | Escapes all non-alphanumeric characters in a string for use in a regex |
 | re.purge() | Clears the regular expression cache |
 
