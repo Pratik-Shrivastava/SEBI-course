@@ -51,13 +51,15 @@ Slicing extracts parts of a sequence (list, string, or tuple) using index ranges
 #### Examples
 ```python
 nums = [10, 20, 30, 40, 50, 60]
+
 print(nums[1:4])    # [20, 30, 40]
-print(nums[:3])     # [10, 20, 30]
-print(nums[3:])     # [40, 50, 60]
-print(nums[-3:])    # [40, 50, 60]
-print(nums[:-2])    # [10, 20, 30, 40]
-print(nums[::-1])   # [60, 50, 40, 30, 20, 10]
-print(nums[-1:-5:-1])  # [60, 50, 40, 30]
+print(nums[:3])     # [10, 20, 30]     (start defaults to 0)
+print(nums[3:])     # [40, 50, 60]     (end defaults to len)
+print(nums[-3:])    # [40, 50, 60]     (negative index counts from end)
+print(nums[:-2])    # [10, 20, 30, 40] (stop before last 2)
+print(nums[::-1])   # [60, 50, 40, 30, 20, 10] (reversed)
+print(nums[-1:-5:-1])  # [60, 50, 40, 30] (reverse subset)
+
 ```
 👉 Negative indices start from the end, and `[::-1]` reverses a list.
 
@@ -83,14 +85,30 @@ df = pd.DataFrame({
     'Sales_B': [90, 110]
 })
 print(df)
+# Output:
+#    Year  Sales_A  Sales_B
+# 0  2023      100       90
+# 1  2024      120      110
 
 # Wide → Long
 df_long = pd.melt(df, id_vars='Year', var_name='Product', value_name='Sales')
 print(df_long)
+# Output:
+#    Year  Product  Sales
+# 0  2023  Sales_A    100
+# 1  2024  Sales_A    120
+# 2  2023  Sales_B     90
+# 3  2024  Sales_B    110
 
 # Long → Wide
 df_wide = df_long.pivot(index='Year', columns='Product', values='Sales')
 print(df_wide)
+# Output:
+# Product  Sales_A  Sales_B
+# Year                    
+# 2023         100       90
+# 2024         120      110
+
 ```
 👉 `melt()` makes datasets tidy; `pivot()` restores them.
 
@@ -106,18 +124,47 @@ A DataFrame is a 2D labeled table of data (rows & columns) using pandas.
 import pandas as pd
 df = pd.DataFrame({'Name':['A','B','C'], 'Age':[23,24,22], 'Dept':['IT','HR','IT']})
 
+# 1. df.head() / df.tail()
 print(df.head(2))
-df.info()
-print(df.describe())
-print(df.loc[0, 'Name'])
-print(df.iloc[1, 1])
-print(df.sort_values('Age'))
-print(df.drop('Dept', axis=1))
-print(df.rename(columns={'Dept':'Department'}))
+# Output:
+#   Name  Age Dept
+# 0    A   23   IT
+# 1    B   24   HR
 
+# 2. df.info()
+df.info()
+# Output: columns, non-null count, data type
+
+# 3. df.describe()
+print(df.describe())
+# Output: count, mean, std, min, max for numeric cols
+
+# 4. df.loc[] / df.iloc[]
+print(df.loc[0, 'Name'])   # A
+print(df.iloc[1, 1])       # 24
+
+# 5. df.sort_values()
+print(df.sort_values('Age'))
+# Output sorted DataFrame by Age
+
+# 6. df.drop()
+print(df.drop('Dept', axis=1))
+# Drops the 'Dept' column
+
+# 7. df.rename()
+print(df.rename(columns={'Dept':'Department'}))
+# Renames column header
+
+# 8. df.merge()
 dept_df = pd.DataFrame({'Dept':['IT','HR'], 'Manager':['Tom','Jane']})
 merged = pd.merge(df, dept_df, on='Dept')
 print(merged)
+# Output:
+#   Name  Age Dept Manager
+# 0    A   23   IT     Tom
+# 1    C   22   IT     Tom
+# 2    B   24   HR    Jane
+
 ```
 👉 `df` is just a variable name for your dataset.
 
@@ -129,16 +176,21 @@ print(merged)
 Stores key–value pairs (unordered, mutable).
 ```python
 d = {'a': 1, 'b': 2, 'c': 3}
-print(d.get('b'))
-print(list(d.keys()))
-print(list(d.values()))
-print(list(d.items()))
+
+print(d.get('b'))              # 2
+print(list(d.keys()))          # ['a', 'b', 'c']
+print(list(d.values()))        # [1, 2, 3]
+print(list(d.items()))         # [('a', 1), ('b', 2), ('c', 3)]
+
 d.update({'d': 4})
-print(d)
-print(d.pop('a'))
-print(d)
+print(d)                       # {'a':1, 'b':2, 'c':3, 'd':4}
+
+print(d.pop('a'))              # 1
+print(d)                       # {'b':2, 'c':3, 'd':4}
+
 d.clear()
-print(d)
+print(d)                       # {}
+
 ```
 👉 `get()` avoids errors; `update()` merges; `pop()` removes a key.
 
@@ -147,12 +199,17 @@ Stores unique unordered items — no duplicates.
 ```python
 s = {1, 2, 3}
 s.add(4)
+print(s)                       # {1, 2, 3, 4}
+
 s.remove(2)
+print(s)                       # {1, 3, 4}
+
 s2 = {3, 4, 5}
-print(s.union(s2))
-print(s.intersection(s2))
-print(s.difference(s2))
-print(s.symmetric_difference(s2))
+print(s.union(s2))             # {1, 3, 4, 5}
+print(s.intersection(s2))      # {3, 4}
+print(s.difference(s2))        # {1}
+print(s.symmetric_difference(s2)) # {1, 5}
+
 ```
 👉 Useful for mathematical set operations.
 
@@ -172,7 +229,8 @@ with open('test.txt', 'w') as f:
 # Reading file
 with open('test.txt', 'r') as f:
     data = f.read()
-print(data)
+print(data)   # Hello IFSCA
+
 ```
 Using pandas:
 ```python
@@ -181,6 +239,11 @@ df = pd.DataFrame({'Name':['A','B'], 'Age':[23,24]})
 df.to_csv('data.csv', index=False)
 new_df = pd.read_csv('data.csv')
 print(new_df)
+# Output:
+#   Name  Age
+# 0    A   23
+# 1    B   24
+
 ```
 
 ---
@@ -191,7 +254,9 @@ print(new_df)
 ```python
 def greet(name):
     return f"Hello, {name}"
-print(greet("IFSCA"))
+
+print(greet("IFSCA"))  # Hello, IFSCA
+
 ```
 
 #### Class Example
@@ -206,6 +271,8 @@ class Car:
 
 mycar = Car("Tesla", 2025)
 print(mycar.drive())
+# Output: Tesla (2025) is driving.
+
 ```
 
 ---
@@ -220,6 +287,8 @@ import numpy as np
 X = np.array([[1,2],[2,3],[10,11],[11,12]])
 kmeans = KMeans(n_clusters=2, n_init=5).fit(X)
 print(kmeans.labels_)
+# Output: [1 1 0 0]
+
 ```
 
 ---
@@ -230,15 +299,31 @@ print(kmeans.labels_)
 Ordered, mutable sequence of elements.
 ```python
 nums = [3, 1, 4, 1, 5]
+
 nums.append(9)
+print(nums)                   # [3,1,4,1,5,9]
+
 nums.extend([2,6])
+print(nums)                   # [3,1,4,1,5,9,2,6]
+
 nums.insert(2, 10)
+print(nums)                   # [3,1,10,4,1,5,9,2,6]
+
 nums.remove(1)
-print(nums.pop())
+print(nums)                   # Removes first 1 → [3,10,4,1,5,9,2,6]
+
+print(nums.pop())             # Removes last → 6
+print(nums)                   # [3,10,4,1,5,9,2]
+
 nums.sort()
+print(nums)                   # [1,2,3,4,5,9,10]
+
 nums.reverse()
-print(nums.count(10))
-print(nums.index(5))
+print(nums)                   # [10,9,5,4,3,2,1]
+
+print(nums.count(10))         # 1
+print(nums.index(5))          # 2
+
 ```
 👉 Each method modifies or gives info about the list.
 
@@ -250,9 +335,10 @@ print(nums.index(5))
 Use pandas for file I/O.
 ```python
 import pandas as pd
-df = pd.read_csv("sales.csv")
-df.to_excel("sales.xlsx", index=False)
-df2 = pd.read_json("data.json")
+df = pd.read_csv("sales.csv")         # Import CSV
+df.to_excel("sales.xlsx", index=False) # Export Excel
+df2 = pd.read_json("data.json")       # Read JSON
+
 ```
 
 ---
@@ -266,21 +352,27 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
+# Sample Data
 df = pd.DataFrame({'Year':[2022,2023,2024], 'Sales':[200,300,250]})
 
+# Line Plot
 plt.plot(df['Year'], df['Sales'])
 plt.title("Yearly Sales Trend")
 plt.show()
 
+# Bar Plot
 plt.bar(df['Year'], df['Sales'])
 plt.show()
 
+# Scatter Plot
 plt.scatter(df['Year'], df['Sales'])
 plt.show()
 
+# Heatmap (Seaborn)
 data = [[1,2,3],[4,5,6],[7,8,9]]
 sns.heatmap(data, annot=True)
 plt.show()
+
 ```
 👉 `plt.plot()` → line graph | `plt.bar()` → bar chart | `plt.scatter()` → relationships | `sns.heatmap()` → color grid.
 
