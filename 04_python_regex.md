@@ -220,6 +220,15 @@ print(s.symmetric_difference(s2)) # {1, 5}
 **Concept:**
 Read/write files using Python’s `open()` or pandas.
 
+| Mode | Function |
+|-----------|-------------|
+| **'r'** | read |
+| **'w'** | write(overwrite) |
+| **'a'** | append |
+| **'rb'** | read binary mode |
+| **'wb'** | write binary mode |
+
+
 #### Example
 ```python
 # Writing to file
