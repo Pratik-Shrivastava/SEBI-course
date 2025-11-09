@@ -8,10 +8,10 @@
 ### 1️⃣ REGEX (Regular Expressions)
 
 **Definition:**
-Regular Expressions are smart patterns used to match, extract, or replace strings using the `re` module.
+Regular Expressions are powerful text patterns used to find, extract, or replace specific strings using the `re` module in Python.
 
 **Concept:**
-Instead of searching text manually, regex lets you describe what you want — e.g., digits, words, email IDs.
+Think of regex as **smart search**. Instead of searching text manually, regex lets you describe what you want — e.g., digits, words, email IDs.
 
 #### Common Functions
 | Function | Description |
@@ -73,6 +73,13 @@ Transforming data structure — from wide to long or vice versa — using `panda
 **Concept:**
 - **Wide → Long:** multiple columns become rows (tidy format)
 - **Long → Wide:** rows expand into new columns
+
+| Function | Description |
+|-----------|-------------|
+| pd.melt(df, id_vars=['id']) | Converts columns into rows — gathers many columns into two: variable & value |
+| df.pivot(index, columns, values)	| Opposite of melt — spreads rows into multiple columns |
+| df.stack() / df.unstack()	| Stack/unstack hierarchical columns or indexes |
+| df.transpose()	| Flip rows ↔ columns (like Excel transpose) |
 
 #### Example
 ```python
@@ -259,6 +266,13 @@ print(new_df)
 
 ### 7️⃣ CLASSES & FUNCTIONS
 
+#### Definition:
+Functions organize code; classes define reusable blueprints for objects.
+
+#### Concept:
+A function performs a single job.
+A class can bundle multiple functions (methods) and variables (attributes) together.
+
 #### Functions Example
 ```python
 def greet(name):
@@ -288,8 +302,21 @@ print(mycar.drive())
 
 ### 8️⃣ DATA MINING
 
+**Definition:**
+Extracting useful patterns, insights, or predictions from large datasets.
+
 **Concept:**
-Extract patterns from data using ML algorithms.
+It’s part of Machine Learning — using algorithms to find patterns.
+
+### Common Tools:
+
+| Task | Package / Function |
+|-----------|-------------|
+| Preprocessing |	pandas, sklearn.preprocessing |
+| Splitting data |	train_test_split() |
+| Model training |	.fit() |
+| Prediction |	.predict() |
+| Evaluation |	accuracy_score(), r2_score() |
 ```python
 from sklearn.cluster import KMeans
 import numpy as np
@@ -340,8 +367,19 @@ print(nums.index(5))          # 2
 
 ### 🔟 IMPORT / EXPORT DATA
 
+**Definition:**
+Bringing data into Python or saving it back after analysis.
+
 **Concept:**
-Use pandas for file I/O.
+Pandas makes this super easy — supports Excel, CSV, JSON, SQL, HTML.
+
+#### Functions
+| Format | Import | Export |
+|---------|----------------|----------------|
+| **CSV** | `pd.read_csv()` | `to_csv()` |
+| **Excel** | `pd.read_excel()` | `to_excel()` |
+| **JSON** | `pd.read_json()` | `to_json()` |
+| **SQL** | `pd.read_sql()` | `to_sql()` |
 ```python
 import pandas as pd
 df = pd.read_csv("sales.csv")         # Import CSV
@@ -354,8 +392,19 @@ df2 = pd.read_json("data.json")       # Read JSON
 
 ### 1️⃣1️⃣ CHARTS & GRAPHS
 
+**Definition:**
+Visual representation of data for quick insight.
+
 **Concept:**
-Visualize data trends using `matplotlib` and `seaborn`.
+Plots make patterns easier to spot — trends, comparisons, relationships.
+
+#### Main Libraries:
+| Library   | Example Function                | Purpose                    |
+|------------|----------------------------------|-----------------------------|
+| matplotlib | plt.plot(), plt.bar()            | Basic plots                 |
+| seaborn    | sns.heatmap(), sns.boxplot()     | Stylish, statistical plots  |
+| plotly     | px.bar(), px.scatter()           | Interactive charts          |
+
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
