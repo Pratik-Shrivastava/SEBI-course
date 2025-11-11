@@ -8,7 +8,8 @@ With the growth of online connectivity, hacking, viruses, and fraud have become 
 
 ### **Threat Categories:**
 - Human errors
-- Espionage and sabotage
+- Espionage: gathering secret information
+- sabotage: deliberate destruction or disruption of property or systems
 - Software and hardware failures
 - Deliberate acts (e.g., theft, extortion)
 
