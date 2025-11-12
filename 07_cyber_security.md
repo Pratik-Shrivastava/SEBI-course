@@ -132,12 +132,71 @@ Cryptography secures data by converting it into unreadable form using mathematic
 ---
 
 ## **10. Network Security Protocols**
-| Protocol | Function |
-|-----------|-----------|
-| **SSL/TLS** | Secures web traffic (HTTPS) |
-| **SSH** | Secure remote access |
-| **IPSec** | Secures IP layer communications |
-| **PGP & S/MIME** | Email security protocols |
+
+| **Protocol** | **Port Number** | **Function / Purpose** | **Prevents / Protects Against** | **OSI Layer** | **IP Version** | **Other Information** |
+|---------------|----------------|-------------------------|----------------------------------|----------------|----------------|------------------------|
+| **SSL (Secure Sockets Layer)** | 443 (for HTTPS over SSL), 465 (SMTP over SSL) | Encrypts data between web browser and server | Eavesdropping, Man-in-the-middle (MITM), Data tampering | Transport Layer | IPv4 / IPv6 | Deprecated, replaced by TLS |
+| **TLS (Transport Layer Security)** | 443 (HTTPS), 995 (POP3S), 993 (IMAPS), 465 (SMTPS) | Ensures secure transmission via encryption, authentication, and integrity | Eavesdropping, Data manipulation, MITM | Transport Layer | IPv4 / IPv6 | Successor of SSL; uses asymmetric + symmetric encryption |
+| **HTTPS (Hypertext Transfer Protocol Secure)** | 443 | Secure version of HTTP; encrypts data using SSL/TLS | Data sniffing, MITM attacks | Application Layer | IPv4 / IPv6 | Used for secure web browsing |
+| **SSH (Secure Shell)** | 22 | Secure remote login and command execution | Eavesdropping, Password theft, MITM | Application Layer | IPv4 / IPv6 | Replaces Telnet and FTP for secure connections |
+| **SFTP (SSH File Transfer Protocol)** | 22 (via SSH) | Secure file transfer using SSH encryption | Data interception, Unauthorized file access | Application Layer | IPv4 / IPv6 | Different from FTPS (uses SSL/TLS) |
+| **FTPS (FTP Secure)** | 990 (implicit), 21 (explicit) | Secure file transfer using SSL/TLS | Data sniffing, Credential theft | Application Layer | IPv4 / IPv6 | Extension of FTP adding SSL/TLS |
+| **IPSec (Internet Protocol Security)** | Protocol IDs: 50 (ESP), 51 (AH), 500 (IKE) | Secures IP packets via authentication & encryption | IP spoofing, Replay attacks, Packet sniffing | Network Layer | IPv4 & IPv6 | Provides VPN security; Transport & Tunnel modes |
+| **IKE (Internet Key Exchange)** | 500 (UDP) | Establishes security associations for IPSec | Unauthorized access, Replay attacks | Network Layer | IPv4 / IPv6 | Automates key exchange and management |
+| **DNSSEC (Domain Name System Security Extensions)** | 53 (UDP/TCP) | Adds authentication to DNS responses | DNS spoofing, Cache poisoning | Application Layer | IPv4 / IPv6 | Uses digital signatures to validate DNS data |
+| **Kerberos** | 88 (TCP/UDP) | Authentication protocol using tickets | Replay attacks, Impersonation | Application Layer | IPv4 / IPv6 | Used in Windows domains; based on symmetric key cryptography |
+| **SMTP with STARTTLS / SMTPS** | 25 (STARTTLS), 465 (SMTPS) | Secures email transmission | Email interception, Data leaks | Application Layer | IPv4 / IPv6 | Encrypts communication between mail servers |
+| **POP3S (Post Office Protocol Secure)** | 995 | Secure retrieval of emails | Credential theft, Data sniffing | Application Layer | IPv4 / IPv6 | POP3 over SSL/TLS |
+| **IMAPS (Internet Message Access Protocol Secure)** | 993 | Securely retrieves emails from mail servers | MITM, Unauthorized access | Application Layer | IPv4 / IPv6 | IMAP over SSL/TLS |
+| **SNMPv3 (Simple Network Management Protocol v3)** | 161 (UDP) | Manages network devices securely | Unauthorized monitoring, Data tampering | Application Layer | IPv4 / IPv6 | Adds authentication & encryption (not in v1/v2) |
+| **RADIUS (Remote Authentication Dial-In User Service)** | 1812 (Authentication), 1813 (Accounting) | Centralized authentication for network access | Unauthorized access, Replay attacks | Application Layer | IPv4 / IPv6 | Uses shared secret; common in Wi-Fi authentication |
+| **TACACS+ (Terminal Access Controller Access Control System Plus)** | 49 | Provides centralized authentication similar to RADIUS but fully encrypted | Password sniffing, Unauthorized access | Application Layer | IPv4 / IPv6 | Used in Cisco devices; separates AAA functions |
+| **LDAP over SSL/TLS (LDAPS)** | 636 | Securely manages directory access | Credential theft, Replay attack | Application Layer | IPv4 / IPv6 | Encrypts Lightweight Directory Access Protocol |
+| **PGP (Pretty Good Privacy)** | N/A (Application based) | Encrypts and authenticates email content | Email tampering, Spoofing | Application Layer | IPv4 / IPv6 | Uses public-key encryption for secure email |
+| **SPF, DKIM, DMARC** | N/A (DNS-based) | Authenticate email senders to prevent spam | Email spoofing, Phishing | Application Layer | IPv4 / IPv6 | Verified via DNS records |
+| **SRTP (Secure Real-Time Transport Protocol)** | Dynamic ports (UDP-based) | Encrypts audio/video data in VoIP | Eavesdropping, Replay attacks | Application Layer | IPv4 / IPv6 | Used with SIP for secure VoIP calls |
+| **SIP-TLS (Session Initiation Protocol over TLS)** | 5061 | Secure session setup for VoIP calls | Eavesdropping, Call hijacking | Application Layer | IPv4 / IPv6 | SIP (5060) unsecured → SIP-TLS (5061) secured |
+| **802.1X (Port-Based Network Access Control)** | Uses EAP over LAN | Authenticates devices before granting network access | Unauthorized LAN access | Data Link Layer | IPv4 / IPv6 | Common in enterprise Wi-Fi & LAN |
+| **WPA2 / WPA3 (Wi-Fi Protected Access)** | N/A (used in wireless frames) | Secures Wi-Fi communication | Eavesdropping, Dictionary attacks | Data Link Layer | IPv4 / IPv6 | WPA3 uses SAE (Simultaneous Authentication of Equals) |
+| **VPN (Virtual Private Network - OpenVPN, L2TP/IPSec, PPTP)** | OpenVPN – 1194, L2TP – 1701, PPTP – 1723 | Creates encrypted tunnel for secure data transmission | Snooping, MITM attacks | Network / Transport Layer | IPv4 / IPv6 | Used for remote secure access |
+
+---
+
+## 🧠 Summary by OSI Layer
+
+| **OSI Layer** | **Security Protocols** | **Main Function** |
+|----------------|-----------------------|-------------------|
+| **Application** | HTTPS, SSH, FTPS, SFTP, SNMPv3, Kerberos, DNSSEC, RADIUS, TACACS+, LDAPS | Encryption, Authentication |
+| **Transport** | SSL/TLS | Data encryption and integrity |
+| **Network** | IPSec, IKE | Secure packet transfer between networks |
+| **Data Link** | 802.1X, WPA2, WPA3 | Secure access control for LAN/Wi-Fi |
+
+---
+
+## ⚙️ Attack Prevention Mapping
+
+| **Attack Type** | **Prevented By** |
+|------------------|------------------|
+| **Man-in-the-Middle (MITM)** | TLS, IPSec, SSH |
+| **Eavesdropping / Sniffing** | TLS, IPSec, WPA2/3 |
+| **IP Spoofing** | IPSec (Authentication Header) |
+| **DNS Spoofing / Poisoning** | DNSSEC |
+| **Email Spoofing / Phishing** | SPF, DKIM, DMARC |
+| **Unauthorized Network Access** | 802.1X, RADIUS, TACACS+ |
+| **Replay Attacks** | Kerberos, IPSec |
+| **Password Theft** | SSH, SNMPv3, TLS |
+
+---
+
+## 🔑 Key Notes
+
+- **TLS** is the backbone of modern web security.
+- **IPSec** works at the **Network Layer**, ideal for VPNs.
+- **802.1X + RADIUS** = Enterprise-grade network access control.
+- **Kerberos** provides **mutual authentication** via tickets.
+- **WPA3** offers improved Wi-Fi protection using **SAE**.
+
+---
 
 ---
 
