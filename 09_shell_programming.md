@@ -76,6 +76,8 @@ readonly PI=3.14
 | `$?` | Exit status of last command |
 
 ### **Example**
+- When you run a shell script, you can pass arguments to it — just like passing parameters to a function.
+- Create a sample script as below:
 ```bash
 #!/bin/bash
 echo "Script name: $0"
@@ -83,6 +85,19 @@ echo "First arg: $1"
 echo "Total args: $#"
 echo "All args: $@"
 echo "PID: $$"
+```
+- If you save this as args.sh and run:
+
+```bash
+./args.sh apple banana cherry
+```
+- Output:
+```bash
+Script name: ./args.sh
+First argument: apple
+Second argument: banana
+All arguments: apple banana cherry
+Total number of arguments: 3
 ```
 
 ---
