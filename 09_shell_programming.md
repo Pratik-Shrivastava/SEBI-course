@@ -339,14 +339,14 @@ echo $?   # 0 = success
 | `cat file` | Displays file content. | `cat readme.txt` |
 | `head -n 5 file` | Shows first 5 lines. | `head -n 5 log.txt` |
 | `tail -n 5 file` | Shows last 5 lines. | `tail -n 5 log.txt` |
-| `less file` | Opens file in scrollable view (`q` to quit). | `less bigfile.txt` |
-| `more file` | Displays file content one screen at a time. | `more bigfile.txt` |
+| `less file` (NI) | Opens file in scrollable view (`q` to quit). | `less bigfile.txt` |
+| `more file` (NI)| Displays file content one screen at a time. | `more bigfile.txt` |
 
 🧭 *Use `less` for large files — you can scroll up/down easily.*
 
 ---
 
-## 🔍 Search & Filter
+## (Not Important) Search & Filter
 
 | Command | Description | Example |
 |----------|--------------|----------|
