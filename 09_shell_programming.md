@@ -223,76 +223,108 @@ echo $?   # 0 = success
 
 ## 7. Basic UNIX Commands
 
-### **Filesystem Commands**
-```bash
-ls
-ls -l
-pwd
-cd dir
-mkdir dir
-rmdir dir
-touch file
-cp src dst
-mv src dst
-rm file
-rm -r dir
-```
+## 🗂 Filesystem Commands
 
-### **Viewing Files**
-```bash
-cat file
-head -n 5 file
-tail -n 5 file
-less file
-more file
-```
+| Command | Description | Example |
+|----------|--------------|----------|
+| `ls` | Lists files and directories. | `ls` |
+| `ls -l` | Lists files in long format (permissions, size, owner). | `ls -l` |
+| `pwd` | Prints current working directory. | `pwd` → `/home/pratik/projects` |
+| `cd dir` | Changes directory to `dir`. | `cd Documents` |
+| `mkdir dir` | Creates a new directory. | `mkdir my_folder` |
+| `rmdir dir` | Removes an empty directory. | `rmdir my_folder` |
+| `touch file` | Creates an empty file or updates timestamp. | `touch notes.txt` |
+| `cp src dst` | Copies file or directory. | `cp file1.txt backup.txt` |
+| `mv src dst` | Moves or renames file/directory. | `mv old.txt new.txt` |
+| `rm file` | Deletes a file. | `rm notes.txt` |
+| `rm -r dir` | Recursively deletes directory and contents. | `rm -r my_folder` |
 
-### **Search & Filter**
-```bash
-grep "text" file
-grep -i "text" file
-grep -r "text" /path
-sort file
-uniq file
-wc file
-```
-
-### **Permissions**
-```bash
-chmod 755 file
-chmod u+x script.sh
-chown user:group file
-```
-
-### **Processes**
-```bash
-ps
-ps aux
-kill PID
-pstree
-```
-
-### **Networking**
-```bash
-ping google.com
-curl https://example.com
-wget https://example.com
-```
+💡 *Be careful with `rm -r` — it permanently deletes data!*
 
 ---
 
-## 8. Important Special Variables
+## 📄 Viewing Files
 
-| Variable | Meaning |
-|---------|----------|
-| `$$` | PID of current script |
-| `$!` | PID of last background job |
-| `$?` | Exit status of last command |
-| `$0` | Script name |
-| `$#` | Argument count |
-| `$@` | All arguments (separately) |
-| `$*` | All arguments (single string) |
-| `$1...$n` | Positional parameters |
+| Command | Description | Example |
+|----------|--------------|----------|
+| `cat file` | Displays file content. | `cat readme.txt` |
+| `head -n 5 file` | Shows first 5 lines. | `head -n 5 log.txt` |
+| `tail -n 5 file` | Shows last 5 lines. | `tail -n 5 log.txt` |
+| `less file` | Opens file in scrollable view (`q` to quit). | `less bigfile.txt` |
+| `more file` | Displays file content one screen at a time. | `more bigfile.txt` |
+
+🧭 *Use `less` for large files — you can scroll up/down easily.*
+
+---
+
+## 🔍 Search & Filter
+
+| Command | Description | Example |
+|----------|--------------|----------|
+| `grep "text" file` | Searches for text in a file. | `grep "error" logfile.txt` |
+| `grep -i "text" file` | Case-insensitive search. | `grep -i "warning" logfile.txt` |
+| `grep -r "text" /path` | Recursive search in directory. | `grep -r "TODO" /project` |
+| `sort file` | Sorts lines alphabetically. | `sort names.txt` |
+| `uniq file` | Removes duplicate lines (after sorting). | `sort names.txt | uniq` |
+| `wc file` | Counts lines, words, and characters. | `wc essay.txt` → `40 200 1200 essay.txt` |
+
+---
+
+## 🔐 Permissions
+
+| Command | Description | Example |
+|----------|--------------|----------|
+| `chmod 755 file` | Changes file permissions. | `chmod 755 script.sh` |
+| `chmod u+x script.sh` | Adds execute permission for user. | `chmod u+x run.sh` |
+| `chown user:group file` | Changes file ownership. | `chown pratik:devs app.py` |
+
+### 🧩 chmod Breakdown
+
+Each file has 3 permission groups:
+- **u** → user (owner)
+- **g** → group
+- **o** → others
+
+Permissions values:
+| Permission | Meaning | Value |
+|-------------|----------|--------|
+| `r--` | read only | 4 |
+| `rw-` | read & write | 6 |
+| `rwx` | read, write, execute | 7 |
+| `r-x` | read & execute | 5 |
+| `--x` | execute only | 1 |
+| `---` | no permission | 0 |
+
+Example → `chmod 755 file`
+
+| User | Group | Others |
+|-------|--------|--------|
+| 7 = rwx | 5 = r-x | 5 = r-x |
+
+🧠 *Owner can do everything, others can read/execute only.*
+
+---
+
+## ⚙️ Processes
+
+| Command | Description | Example |
+|----------|--------------|----------|
+| `ps` | Shows running processes. | `ps` |
+| `ps aux` | Lists all system processes with details. | `ps aux | grep chrome` |
+| `kill PID` | Terminates a process by ID. | `kill 10234` |
+| `pstree` | Displays process tree structure. | `pstree` |
+
+💡 *Use `kill -9 PID` to forcefully stop a process if needed.*
+
+---
+
+## 🌐 Networking
+
+| Command | Description | Example |
+|----------|--------------|----------|
+| `ping google.com` | Tests network connectivity. | `ping google.com` |
+| `curl https://example.com` | Fetches web content or API data. | `curl https://api.github.com` |
+| `wget https://example.com` | Downloads files from internet. | `wget https://example.com/file.zip` |
 
 ---
 
