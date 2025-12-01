@@ -369,6 +369,10 @@ echo $?   # 0 = success
 
 ### 🧩 chmod Breakdown
 
+- r -> 4
+- w -> 2
+- x -> 1
+
 Each file has 3 permission groups:
 - **u** → user (owner)
 - **g** → group
