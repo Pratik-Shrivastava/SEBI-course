@@ -49,10 +49,84 @@ echo "$age"
 ```
 
 ### **Environment Variables**
+- store system-wide or user-specific configuration settings such as user details, executable paths, and system preferences
+#### ⚙️ **Viewing Environment Variables**
+
+- `printenv`: Displays all environment variables currently available in the shell.
+
 ```bash
 printenv
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 ```
+Example Output:
+```
+PATH=/usr/local/bin:/usr/bin:/bin
+HOME=/home/pratik
+USER=pratik
+SHELL=/bin/bash
+```
+
+To view a specific environment variable, specify its name:
+```bash
+printenv PATH
+```
+Output:
+```
+/usr/local/bin:/usr/bin:/bin
+```
+
+---
+
+#### 🚀 **Defining and Exporting Environment Variables**
+
+- Variables created in the shell are **local** to that shell. To make them available to child processes (like a script or another shell), use the `export` command.
+
+Example:
+```bash
+MY_NAME="Pratik"
+export MY_NAME
+```
+Now `MY_NAME` is accessible in any subprocess started from this shell.
+
+To verify:
+```bash
+echo $MY_NAME
+```
+Output:
+```
+Pratik
+```
+
+---
+
+#### 🧪 **Example: Setting JAVA_HOME**
+
+The `export` command is commonly used to set paths for development environments.
+
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+```
+This ensures that Java executables are globally available in your shell session.
+
+---
+
+#### 🧹 **Removing Environment Variables**
+
+Use `unset` to remove a variable from the environment.
+
+```bash
+unset MY_NAME
+```
+
+---
+
+#### 🧠 **Quick Summary**
+
+| Command | Description | Example |
+|----------|--------------|----------|
+| `printenv` | Displays all or specific environment variables | `printenv PATH` |
+| `export` | Makes a variable accessible to subprocesses | `export MY_NAME=Pratik` |
+| `unset` | Removes a variable from the environment | `unset MY_NAME` |
 
 ### **Constants**
 ```bash
