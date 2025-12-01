@@ -32,8 +32,8 @@ bash script.sh
 
 ### **Types of Variables**
 1. User-defined variables
-2. Environment variables (PATH, HOME)
-3. Special variables ($#, $?, $$, etc.)
+2. Environment variables (`PATH`, `HOME`)
+3. Special variables (`$#`, `$?`, `$$`, etc.)
 
 ### **Defining Variables**
 ```bash
