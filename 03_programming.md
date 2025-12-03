@@ -62,10 +62,22 @@ class Demo {
 
 **Example:**
 ```java
-class A { void display(){ System.out.println("A"); } }
-class B extends A { void display(){ System.out.println("B"); } }
-A obj = new B();
-obj.display(); // B
+class A { 
+  void display() { 
+    System.out.println("A"); 
+  }
+}
+
+class B extends A { 
+  void display() { 
+    System.out.println("B"); 
+  }
+  public static void main(String[] args) {
+    A obj = new B();
+    obj.display(); // B
+  }
+}
+
 ```
 👉 Bound dynamically at runtime.
 
@@ -76,7 +88,9 @@ obj.display(); // B
 
 **Example:**
 ```java
-void change(int x){ x = 10; }
+void change(int x) {
+  x = 10;
+}
 int num = 5;
 change(num); // num = 5
 ```
@@ -106,8 +120,14 @@ list.forEach(n -> System.out.println(n));
 
 **Example:**
 ```java
-abstract class Shape { abstract void draw(); }
-class Circle extends Shape { void draw(){ System.out.println("Circle"); } }
+abstract class Shape { 
+  abstract void draw(); 
+}
+class Circle extends Shape { 
+  void draw() { 
+    System.out.println("Circle"); 
+  } 
+}
 ```
 
 ---
@@ -120,9 +140,15 @@ class Circle extends Shape { void draw(){ System.out.println("Circle"); } }
 
 **Example:**
 ```java
-class A{}
-class B extends A{}
-class C extends B{}
+class A {
+
+}
+class B extends A {
+
+}
+class C extends B {
+
+}
 ```
 👉 `C` inherits all from `A` and `B`.
 
@@ -133,7 +159,9 @@ class C extends B{}
 ```java
 class Car {
   String brand;
-  void drive(){ System.out.println(brand + " driving"); }
+  void drive(){ 
+    System.out.println(brand + " driving"); 
+  }
 }
 Car c = new Car();
 c.brand = "Tesla";
